@@ -1,0 +1,53 @@
+* Lemonade Change. Leetcode problem number: 860
+
+def lemonade_change(bills):
+    """
+    Determines if it's possible to provide change for every bill given, using only $5 and $10 bills.
+
+    Args:
+        bills: A list of integers representing the bills received.
+
+    Returns:
+        True if change can be provided for every bill, False otherwise.
+    """
+
+    five_dollar_bills = 0
+    ten_dollar_bills = 0
+
+    for bill in bills:
+        if bill == 5:
+            five_dollar_bills += 1
+        elif bill == 10:
+            if five_dollar_bills >= 1:
+                five_dollar_bills -= 1
+                ten_dollar_bills += 1
+            else:
+                return False
+        elif bill == 20:
+            if five_dollar_bills >= 1 and ten_dollar_bills >= 1:
+                five_dollar_bills -= 1
+                ten_dollar_bills -= 1
+            elif five_dollar_bills >= 3:
+                five_dollar_bills -= 3
+            else:
+                return False
+
+    return True
+
+# Example usage
+bills = [5, 5, 10, 20]
+can_make_change = lemonade_change(bills)
+print("Can make change:", can_make_change)
+
+Explanation:
+
+Initialize: Initialize five_dollar_bills and ten_dollar_bills to 0.
+Iterate: Iterate through the bills list.
+Handle $5 Bill: If the current bill is $5, increment five_dollar_bills.
+Handle $10 Bill: If the current bill is $10, check if there's at least one $5 bill. If so, decrement five_dollar_bills and increment ten_dollar_bills. Otherwise, return False as change cannot be made.
+Handle $20 Bill: If the current bill is $20, check if there's at least one $5 bill and one $10 bill, or if there are at least three $5 bills. If either condition is met, make the change and update the counters. Otherwise, return False.
+Return Result: After processing all bills, return True if change could be made for every bill, False otherwise.
+
+Output:
+
+Can make change: True
