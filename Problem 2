@@ -1,0 +1,24 @@
+* Implementation of Max-Min by using Divide and Conquer principal TC:O(n)
+
+def max_min(arr):
+    if len(arr) == 1:
+        return arr[0], arr[0]
+
+    mid = len(arr) // 2
+    left_max, left_min = max_min(arr[:mid])
+    right_max, right_min = max_min(arr[mid:])
+
+    return max(left_max, right_max), min(left_min, right_min)
+
+# Example usage
+arr = [38, 27, 43, 3, 9, 82, 10]
+max_val, min_val = max_min(arr)
+print("Maximum value:", max_val)  # Output: Maximum value: 82
+print("Minimum value:", min_val)  # Output: Minimum value: 3
+
+Explanations:
+
+Base case: when there are only two elements in the array, this happens to be the maximum and minimum.
+Divide : It takes two halves of the array.
+Conquer: Each half is recursively called with the max_min function to find the maximum and minimum elements.
+Compare the maxima and minima from the two parts together to find the whole maximum and minimum. It returns the maximum and minimum values.
