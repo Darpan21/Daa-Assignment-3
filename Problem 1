@@ -30,7 +30,7 @@ def merge(left, right):
 # Example usage
 arr = [38, 27, 43, 3, 9, 82, 10]
 sorted_arr = merge_sort(arr)
-print(sorted_arr)  # Output: [3, 9, 10, 27, 38, 43, 82]
+print("sorted array :",sorted_arr)  # Output: [3, 9, 10, 27, 38, 43, 82]
 
 Explanation:
 
