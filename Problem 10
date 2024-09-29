@@ -1,0 +1,40 @@
+* 10. Number of Coins GeeksForGeeks
+
+def min_coins(coins, amount):
+    """
+    Calculates the minimum number of coins required to make the given amount.
+
+    Args:
+        coins: A list of coin denominations.
+        amount: The target amount to be made.
+
+    Returns:
+        The minimum number of coins required, or -1 if it's not possible to make the amount.
+    """
+
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+
+    for coin in coins:
+        for i in range(coin, amount + 1):
+            dp[i] = min(dp[i], dp[i - coin] + 1)
+
+    return dp[amount] if dp[amount] != float('inf') else -1
+
+# Example usage
+coins = [1, 2, 5]
+amount = 11
+min_coins_required = min_coins(coins, amount)
+print("Minimum number of coins required:", min_coins_required)
+
+Explanation:
+
+
+Initialization: It first creates a dp table of size equal to amount+1 and intialized all with float('inf') Except the first element, which is set to 0.
+Fill in the DP table: for each denomination of coins
+Calculate the minimum number of coins required to reach each amount i from the face value to the target amount as a function of the current coin and the already established minimum number of coins for i - coin.
+Return Value: If there is no float('inf') in the last element of dp table corresponding to target amount, return its value as the minimum number of coins needed. Otherwise, return -1 because impossible to make amount.
+
+Output:
+
+Minimum number of coins required: 3
