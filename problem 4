@@ -1,0 +1,50 @@
+* Implementation of Prim’s Algorithm.
+
+import sys
+
+def prims_algorithm(graph):
+    num_vertices = len(graph)
+    selected = [False] * num_vertices  # Track vertices included in MST
+    selected[0] = True  # Start with the first vertex
+    edges = []  # To store the resulting MST edges
+    total_cost = 0  # Total cost of the MST
+
+    for _ in range(num_vertices - 1):
+        minimum = sys.maxsize
+        x = 0  # Row index of the selected vertex
+        y = 0  # Column index of the selected vertex
+
+        # Find the minimum weight edge
+        for i in range(num_vertices):
+            if selected[i]:  # Only consider selected vertices
+                for j in range(num_vertices):
+                    if (not selected[j]) and graph[i][j]:  # If not selected and there's an edge
+                        if minimum > graph[i][j]:
+                            minimum = graph[i][j]
+                            x = i
+                            y = j
+
+        selected[y] = True  # Add vertex to the MST
+        edges.append((x, y, minimum))  # Add edge to the result
+        total_cost += minimum  # Update total cost
+
+    return edges, total_cost
+
+# Example usage
+if __name__ == "__main__":
+    # Adjacency matrix representation of the graph
+    graph = [
+        [0, 2, 0, 6, 0],
+        [2, 0, 3, 8, 5],
+        [0, 3, 0, 0, 7],
+        [6, 8, 0, 0, 9],
+        [0, 5, 7, 9, 0]
+    ]
+    
+    edges, total_cost = prims_algorithm(graph)
+    
+    print("Edges in the Minimum Spanning Tree:")
+    for edge in edges:
+        print(f"{edge[0]} -- {edge[1]} (Weight: {edge[2]})")
+    
+    print(f"Total cost of the Minimum Spanning Tree: {total_cost}")
