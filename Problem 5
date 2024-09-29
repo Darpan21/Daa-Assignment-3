@@ -1,0 +1,28 @@
+* Assign Cookies. (Assume you are an awesome parent and want to give
+your children some cookies. But, you should give each child at most one
+cookie.) Leetcode problem number: 455
+
+def findContentChildren(g, s):
+    # Sort the greed factors and cookie sizes
+    g.sort()
+    s.sort()
+    
+    child_i = 0  # Pointer for children
+    cookie_i = 0  # Pointer for cookies
+    
+    # Loop until we reach the end of either array
+    while child_i < len(g) and cookie_i < len(s):
+        # If the current cookie can satisfy the current child
+        if s[cookie_i] >= g[child_i]:
+            child_i += 1  # Move to the next child
+        cookie_i += 1  # Move to the next cookie
+
+    # The number of satisfied children
+    return child_i
+
+# Example usage
+if __name__ == "__main__":
+    g = [1, 2, 3]  # Greed factors of children
+    s = [1, 1]     # Sizes of cookies
+    satisfied_children = findContentChildren(g, s)
+    print(f"Number of satisfied children: {satisfied_children}")
